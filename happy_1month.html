@@ -1,0 +1,1020 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy 1st Month, Fharda Achmad! 🌻</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <style>
+      :root {
+        --bg-cream: #fdfbf7;
+        --sunflower-yellow: #f59e0b;
+        --sunflower-amber: #d97706;
+        --sunflower-light: #fef3c7;
+        --sunflower-dark: #78350f;
+        --text-main: #33291e;
+        --text-muted: #655643;
+        --card-bg: #ffffff;
+        --shadow-soft: 0 10px 30px rgba(217, 119, 6, 0.08);
+        --border-radius: 20px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: var(--bg-cream);
+        color: var(--text-main);
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      /* Floating Sunflower Petals Background Canvas */
+      #petalCanvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 100;
+      }
+
+      .handwritten {
+        font-family: 'Caveat', cursive;
+      }
+
+      /* Container & Grid Layouts */
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      section {
+        padding: 70px 0;
+        position: relative;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 45px;
+      }
+
+      .section-header h2 {
+        font-size: 2.2rem;
+        color: var(--sunflower-dark);
+        margin-bottom: 8px;
+      }
+
+      .section-header p {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+      }
+
+      /* Floating Music Player Widget */
+      .music-widget {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 2px solid var(--sunflower-yellow);
+        padding: 12px 20px;
+        border-radius: 50px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        z-index: 999;
+        transition: all 0.3s ease;
+      }
+
+      .music-widget:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(245, 158, 11, 0.25);
+      }
+
+      .disc-icon {
+        color: var(--sunflower-amber);
+        font-size: 1.5rem;
+        animation: spin 4s linear infinite;
+        animation-play-state: paused;
+      }
+
+      .disc-icon.playing {
+        animation-play-state: running;
+      }
+
+      .music-info {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .music-title {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--sunflower-dark);
+      }
+
+      .music-sub {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+      }
+
+      .play-btn {
+        background: var(--sunflower-yellow);
+        border: none;
+        color: white;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.2s ease;
+      }
+
+      .play-btn:hover {
+        background: var(--sunflower-amber);
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        background: radial-gradient(circle at center, #fffbeb 0%, var(--bg-cream) 70%);
+        padding-top: 40px;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--sunflower-light);
+        color: var(--sunflower-dark);
+        padding: 8px 20px;
+        border-radius: 30px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        border: 1px solid rgba(245, 158, 11, 0.3);
+      }
+
+      .hero h1 {
+        font-size: 2.7rem;
+        color: var(--sunflower-dark);
+        line-height: 1.2;
+        margin-bottom: 15px;
+      }
+
+      .hero p.lead {
+        font-size: 1.2rem;
+        color: var(--text-muted);
+        max-width: 650px;
+        margin: 0 auto 35px;
+        line-height: 1.7;
+      }
+
+      /* Timer Section */
+      .timer-card {
+        background: var(--card-bg);
+        border-radius: var(--border-radius);
+        padding: 30px;
+        box-shadow: var(--shadow-soft);
+        border: 1px solid var(--sunflower-light);
+        margin-top: 20px;
+      }
+
+      .timer-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .timer-box {
+        background: #fffbeb;
+        padding: 18px 10px;
+        border-radius: 15px;
+        border: 1px dashed var(--sunflower-amber);
+      }
+
+      .timer-num {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--sunflower-amber);
+        line-height: 1;
+      }
+
+      .timer-label {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-top: 6px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+      }
+
+      /* Timeline Section */
+      .timeline {
+        position: relative;
+        padding-left: 30px;
+      }
+
+      .timeline::before {
+        content: '';
+        position: absolute;
+        left: 10px;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(to bottom, var(--sunflower-yellow), var(--sunflower-light));
+        border-radius: 3px;
+      }
+
+      .timeline-item {
+        position: relative;
+        margin-bottom: 35px;
+        background: var(--card-bg);
+        padding: 25px;
+        border-radius: 18px;
+        box-shadow: var(--shadow-soft);
+        border-left: 4px solid var(--sunflower-yellow);
+      }
+
+      .timeline-item::after {
+        content: '🌻';
+        position: absolute;
+        left: -38px;
+        top: 20px;
+        font-size: 1.2rem;
+        background: var(--bg-cream);
+        border-radius: 50%;
+        padding: 2px;
+      }
+
+      .timeline-date {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--sunflower-amber);
+        margin-bottom: 6px;
+        text-transform: uppercase;
+      }
+
+      .timeline-title {
+        font-size: 1.3rem;
+        color: var(--sunflower-dark);
+        margin-bottom: 10px;
+      }
+
+      .timeline-desc {
+        color: var(--text-muted);
+        line-height: 1.6;
+        font-size: 0.98rem;
+      }
+
+      /* Photo Gallery Grid */
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+      }
+
+      .polaroid {
+        background: #ffffff;
+        padding: 15px 15px 25px 15px;
+        border-radius: 12px;
+        box-shadow: var(--shadow-soft);
+        transition: all 0.3s ease;
+        position: relative;
+        border: 1px solid #f3f0e6;
+      }
+
+      .polaroid-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Membuat foto menyesuaikan kotak secara presisi */
+      }
+
+      .polaroid:hover {
+        transform: translateY(-8px) rotate(1deg);
+        box-shadow: 0 15px 35px rgba(245, 158, 11, 0.2);
+      }
+
+      .polaroid-img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 8px;
+        background-color: var(--sunflower-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--sunflower-amber);
+        font-size: 2rem;
+      }
+
+      .polaroid-caption {
+        margin-top: 15px;
+        text-align: center;
+        font-size: 1.3rem;
+        color: var(--sunflower-dark);
+        line-height: 1.3;
+      }
+
+      .polaroid-sub {
+        text-align: center;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        margin-top: 4px;
+      }
+
+      /* Reasons Why I Love You - Flip Cards */
+      .reasons-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+      }
+
+      .flip-card {
+        background-color: transparent;
+        height: 180px;
+        perspective: 1000px;
+        cursor: pointer;
+      }
+
+      .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-style: preserve-3d;
+      }
+
+      .flip-card:hover .flip-card-inner,
+      .flip-card.flipped .flip-card-inner {
+        transform: rotateY(180deg);
+      }
+
+      .flip-front,
+      .flip-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        border-radius: 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .flip-front {
+        background: #ffffff;
+        border: 2px dashed var(--sunflower-yellow);
+        color: var(--sunflower-dark);
+      }
+
+      .flip-front i {
+        font-size: 2rem;
+        color: var(--sunflower-amber);
+        margin-bottom: 10px;
+      }
+
+      .flip-back {
+        background: linear-gradient(135deg, var(--sunflower-yellow), var(--sunflower-amber));
+        color: white;
+        transform: rotateY(180deg);
+        line-height: 1.5;
+        font-size: 0.95rem;
+      }
+
+      /* Open When Letters Section */
+      .letters-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+      }
+
+      .envelope-card {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 25px 20px;
+        text-align: center;
+        border: 1px solid var(--sunflower-light);
+        box-shadow: var(--shadow-soft);
+        cursor: pointer;
+        transition: 0.3s ease;
+      }
+
+      .envelope-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--sunflower-yellow);
+        background: #fffdf5;
+      }
+
+      .envelope-card i {
+        font-size: 2.5rem;
+        color: var(--sunflower-amber);
+        margin-bottom: 12px;
+      }
+
+      .envelope-title {
+        font-weight: 700;
+        color: var(--sunflower-dark);
+        font-size: 1rem;
+      }
+
+      /* Modal Popup */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        opacity: 0;
+        pointer-events: none;
+        transition: 0.3s ease;
+        padding: 20px;
+      }
+
+      .modal-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .modal-content {
+        background: #ffffff;
+        max-width: 500px;
+        width: 100%;
+        padding: 35px 30px;
+        border-radius: 24px;
+        border: 2px solid var(--sunflower-yellow);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        position: relative;
+        transform: scale(0.9);
+        transition: 0.3s ease;
+        text-align: center;
+      }
+
+      .modal-overlay.active .modal-content {
+        transform: scale(1);
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--text-muted);
+        cursor: pointer;
+      }
+
+      .modal-body {
+        margin-top: 15px;
+        line-height: 1.7;
+        color: var(--text-main);
+        text-align: justify;
+        font-size: 1rem;
+      }
+
+      /* Our Firsts Cards */
+      .firsts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+      }
+
+      .first-card {
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 25px;
+        display: flex;
+        align-items: flex-start;
+        gap: 18px;
+        box-shadow: var(--shadow-soft);
+        border: 1px solid var(--sunflower-light);
+      }
+
+      .first-icon {
+        background: var(--sunflower-light);
+        color: var(--sunflower-amber);
+        width: 50px;
+        height: 50px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        flex-shrink: 0;
+      }
+
+      .first-details h4 {
+        color: var(--sunflower-dark);
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+      }
+
+      .first-details p {
+        color: var(--text-muted);
+        font-size: 0.92rem;
+        line-height: 1.5;
+      }
+
+      /* Final Heartfelt Note Footer */
+      .closing-section {
+        background: linear-gradient(to bottom, var(--bg-cream), #fef3c7);
+        border-radius: 30px;
+        padding: 50px 30px;
+        text-align: center;
+        margin-bottom: 60px;
+        border: 2px solid var(--sunflower-light);
+      }
+
+      .closing-section h3 {
+        font-size: 2.2rem;
+        color: var(--sunflower-dark);
+        margin-bottom: 20px;
+      }
+
+      .closing-text {
+        max-width: 700px;
+        margin: 0 auto 30px;
+        line-height: 1.8;
+        font-size: 16px;
+        color: var(--text-main);
+        text-align: center;
+      }
+
+      .action-btn {
+        background: linear-gradient(135deg, var(--sunflower-yellow), var(--sunflower-amber));
+        color: white;
+        border: none;
+        padding: 15px 35px;
+        font-size: 1.05rem;
+        font-weight: 700;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 10px 25px rgba(217, 119, 6, 0.3);
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .action-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(217, 119, 6, 0.4);
+      }
+
+      footer {
+        text-align: center;
+        padding: 25px 0 50px;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+      }
+
+      /* Animations */
+      @keyframes spin {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.3rem;
+        }
+        .timer-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .section-header h2 {
+          font-size: 1.8rem;
+        }
+        .music-widget {
+          bottom: 15px;
+          right: 15px;
+          padding: 8px 15px;
+        }
+        .music-info {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Canvas Animation for Floating Sunflower Petals -->
+    <canvas id="petalCanvas"></canvas>
+
+    <!-- Floating Interactive Music Player Widget (Section 3) -->
+    <div class="music-widget">
+      <i class="fa-solid fa-compact-disc disc-icon" id="discIcon"></i>
+      <div class="music-info">
+        <span class="music-title">Our Song 🌻</span>
+        <span class="music-sub">Klik play biar pas baca feel-nya dapet!</span>
+      </div>
+      <button class="play-btn" id="playAudioBtn" onclick="toggleAudio()">
+        <i class="fa-solid fa-play" id="playIcon"></i>
+      </button>
+    </div>
+
+    <!-- Audio Element (Ganti src dengan lagu kenangan kalian berdua jika ada) -->
+    <audio id="bgMusic" loop>
+      <source src="yungkai.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-badge">
+          <span>🌻 Happy 1st Month Anniversary</span>
+        </div>
+        <h1>Spesial Buat Kamu, Bii 🌻</h1>
+        <p class="lead">Gak kerasa ya, udah sebulan kita jalan bareng. Web kecil ini sengaja aku bikin khusus buat kamu, sebagai pengingat semua cerita manis, ketawa bareng, dan momen indah yang udah kita lalui sebulan ini.</p>
+
+        <!-- LIVE COUNT-UP TIMER (Section 4) -->
+        <div class="timer-card">
+          <span class="handwritten" style="font-size: 1.8rem; color: var(--sunflower-amber)">Kita udah bareng-bareng selama:</span>
+          <div class="timer-grid">
+            <div class="timer-box">
+              <div class="timer-num" id="days">30</div>
+              <div class="timer-label">Hari</div>
+            </div>
+            <div class="timer-box">
+              <div class="timer-num" id="hours">00</div>
+              <div class="timer-label">Jam</div>
+            </div>
+            <div class="timer-box">
+              <div class="timer-num" id="minutes">00</div>
+              <div class="timer-label">Menit</div>
+            </div>
+            <div class="timer-box">
+              <div class="timer-num" id="seconds">00</div>
+              <div class="timer-label">Detik</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUR JOURNEY / TIMELINE (Section 1) -->
+    <section id="journey">
+      <div class="container">
+        <div class="section-header">
+          <h2>Our Journey 🛤️</h2>
+          <p class="handwritten" style="font-size: 1.5rem; color: var(--sunflower-amber)">Momen-momen yang udah kita laluin bareng...</p>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">Awal Cerita</div>
+            <h3 class="timeline-title">Pertama Kali Ngobrol Bareng</h3>
+            <p class="timeline-desc">Kalau ga salah pertama kita ngobrol ya di astha itu, waktu bareng-bareng sama temenku yang lain, dan diwaktu itu aku sih ngerasa kamu udah nyaman aja ngobrol sama aku maupun temenku.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">Momen Istimewa</div>
+            <h3 class="timeline-title">Kenangan Yang Gabakal Dilupain</h3>
+            <p class="timeline-desc">Jujur aku ngerasa setiap kita ketemu atau momen apapun itu yang bareng kamu, aku gabisa bilang yang paling disuka yang mana, karena aku ngerasa semuanya special kalo bareng kamu .</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">Hari H</div>
+            <h3 class="timeline-title">Hari Pertama Kita Resmi Jadian</h3>
+            <p class="timeline-desc">Hari di mana akhirnya aku bisa bernapas lega, gaperlu overthinking lagi kamu suka aku juga atau engga, dan hari di mana akhirnya aku bisa ngerasa milikin kamu seutuhnya.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">Hari Ini</div>
+            <h3 class="timeline-title">1 Bulan Bersama Kamu</h3>
+            <p class="timeline-desc">
+              Satu bulan ini kita saling kenal lebih dalam, dan belajar memahami satu sama lain. Masalah bakal selalu ada, tapi aku harap kita bisa menghadapinya sama-sama. Semoga ini baru awal dari cerita panjang kita ke depannya ya!
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHOTO GALLERY / MEMORIES GRID (Section 2) -->
+    <section id="gallery" style="background: #fffdf7">
+      <div class="container">
+        <div class="section-header">
+          <h2>Memories Grid 📸</h2>
+          <p class="handwritten" style="font-size: 1.5rem; color: var(--sunflower-amber)">Kumpulan momen manis kita sebulan terakhir ini...</p>
+        </div>
+
+        <div class="gallery-grid">
+          <div class="polaroid">
+            <div class="polaroid-img">
+              <img src="foto1.jpeg" alt="" />
+            </div>
+            <div class="polaroid-caption handwritten">04 Agustus 2026</div>
+            <div class="polaroid-sub">Hari di mana akhirnya aku ngungkapin isi hati aku, dan waktu itu kamu ga pikir panjang buat nerima aku, jadi ya akhirnya kita resmi jadian deh yey!</div>
+          </div>
+
+          <div class="polaroid">
+            <div class="polaroid-img">
+              <img src="foto2.jpeg" alt="" />
+            </div>
+            <div class="polaroid-caption handwritten">22 Agustus 2026</div>
+            <div class="polaroid-sub">Kalau ini pas hari ulang tahun kamu, aku foto candid. Awalnya pengen foto bareng bunga nya tapi aku lupa jadi ya seadanya deh, tapi momennya gabakal dilupain!</div>
+          </div>
+
+          <div class="polaroid">
+            <div class="polaroid-img">
+              <img src="foto3.jpeg" alt="" />
+            </div>
+            <div class="polaroid-caption handwritten">01 September 2026</div>
+            <div class="polaroid-sub">Nah kalau ini waktu aku lagi sibuk banget, akhirnya aku bisa cari waktu luang buat kamu dan udah ga kangen lagi deh karena udah ketemu. Btw fotonya bagus bangett!</div>
+          </div>
+        </div>
+        <p style="text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-top: 20px">*(Gak sabar sama foto-foto kita lainnya nanti!)*</p>
+      </div>
+    </section>
+
+    <!-- REASONS WHY I LOVE YOU (Section 5) -->
+    <section id="reasons">
+      <div class="container">
+        <div class="section-header">
+          <h2>Alasan Kenapa Aku Sayang Kamu 💡</h2>
+          <p class="handwritten" style="font-size: 1.5rem; color: var(--sunflower-amber)">Coba klik kartunya buat liat jawabannya ya!</p>
+        </div>
+
+        <div class="reasons-grid">
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-front">
+                <i class="fa-solid fa-face-smile-beam"></i>
+                <h3>Kebaikan Kamu</h3>
+              </div>
+              <div class="flip-back">Aku sering bilang kamu baik. Meski menurut kamu itu cuma standar, buat aku kebaikanmu itu kerasa beda. Aku harap kamu juga bisa sebaik itu sama diri kamu sendiri.</div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-front">
+                <i class="fa-solid fa-heart"></i>
+                <h3>Ketulusan Kamu</h3>
+              </div>
+              <div class="flip-back">Aku suka cara kamu tulus tanpa banyak nunjukin walaupun begitu aku tau kamu sayang sama aku. Hal-hal kecil yang kamu lakuin selalu kerasa berarti buat aku.</div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-front">
+                <i class="fa-solid fa-comments"></i>
+                <h3>Obrolan Nyambung</h3>
+              </div>
+              <div class="flip-back">Ngobrol sama kamu, dari topik yang gak penting sampai deep talk yang serius tuh selalu seru aja gitu tanpa ngerasa canggung. Aku harap kamu juga ngerasa begitu.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OPEN WHEN LETTERS (Section 6) -->
+    <section id="letters" style="background: #fffdf7">
+      <div class="container">
+        <div class="section-header">
+          <h2>Open When... 💌</h2>
+          <p class="handwritten" style="font-size: 1.5rem; color: var(--sunflower-amber)">Kamu bisa buka pesan ini sesuai kondisi kamu...</p>
+        </div>
+
+        <div class="letters-grid">
+          <div class="envelope-card" onclick="openLetter('kangen')">
+            <i class="fa-solid fa-envelope-open-text"></i>
+            <div class="envelope-title">Buka saat kamu lagi kangen...</div>
+          </div>
+
+          <div class="envelope-card" onclick="openLetter('capek')">
+            <i class="fa-solid fa-envelope"></i>
+            <div class="envelope-title">Buka saat kamu merasa capek...</div>
+          </div>
+
+          <div class="envelope-card" onclick="openLetter('sedih')">
+            <i class="fa-solid fa-heart-pulse"></i>
+            <div class="envelope-title">Buka saat kamu butuh semangat...</div>
+          </div>
+
+          <div class="envelope-card" onclick="openLetter('tidur')">
+            <i class="fa-solid fa-moon"></i>
+            <div class="envelope-title">Buka saat kamu mau tidur...</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAVORITE MOMENTS / OUR FIRSTS (Section 7) -->
+
+    <!-- CLOSING LETTER & SURPRISE BUTTON -->
+    <section class="container">
+      <div class="closing-section">
+        <h3>Pesan Khusus Buat Kamu 🌻</h3>
+        <p class="closing-text">
+          Happy 1 month, sayang! Nggak kerasa ya udah sebulan aja kita jalan bareng. Makasih banyak ya udah hadir, selalu mau nemenin aku, dan bikin hari-hari aku terasa jauh lebih berwarna. Jujur, aku bersyukur banget bisa kenal dan punya kamu di hidup aku. <br> <br> Semoga ke depannya kita bisa terus jalan bareng, saling memahami, saling menjaga, dan ngelewatin banyak hal seru berdua. Semoga satu bulan ini jadi awal yang baik buat bulan-bulan dan tahun-tahun kita berikutnya. Aku
+          sayang kamu! ❤️
+        </p>
+        <button class="action-btn" onclick="spawnSunflowers()"><i class="fa-solid fa-sun"></i> More flowers for you</button>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p class="handwritten" style="font-size: 1.4rem; color: var(--sunflower-amber)">Made with love for you bii ❤️</p>
+        <p style="font-size: 0.8rem; margin-top: 5px">Happy 1st Month Anniversary!</p>
+      </div>
+    </footer>
+
+    <!-- MODAL POPUP FOR LETTERS -->
+    <div class="modal-overlay" id="letterModal">
+      <div class="modal-content">
+        <button class="modal-close" onclick="closeLetter()">&times;</button>
+        <h3 id="modalTitle" style="color: var(--sunflower-dark); margin-bottom: 10px"></h3>
+        <div style="color: var(--sunflower-amber); font-size: 2rem; margin-bottom: 10px">🌻</div>
+        <div class="modal-body" id="modalText"></div>
+      </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+      // 1. Live Count-Up Timer Setup (Set default 30 hari ke belakang)
+      const startDate = new Date();
+      startDate.setDate(startDate.getDate() - 30); // Otomatis diset 1 bulan lalu
+
+      function updateTimer() {
+        const now = new Date();
+        const diff = now - startDate;
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / 1000 / 60) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        document.getElementById('days').innerText = days;
+        document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+        document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+        document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+      }
+      setInterval(updateTimer, 1000);
+      updateTimer();
+
+      // 2. Music Player Toggle
+      let isPlaying = false;
+      const audio = document.getElementById('bgMusic');
+      const playBtn = document.getElementById('playAudioBtn');
+      const playIcon = document.getElementById('playIcon');
+      const discIcon = document.getElementById('discIcon');
+
+      function toggleAudio() {
+        if (isPlaying) {
+          audio.pause();
+          playIcon.className = 'fa-solid fa-play';
+          discIcon.classList.remove('playing');
+        } else {
+          audio.play().catch((e) => console.log('Audio autoplay prevented'));
+          playIcon.className = 'fa-solid fa-pause';
+          discIcon.classList.add('playing');
+        }
+        isPlaying = !isPlaying;
+      }
+
+      // 3. Open When Letters Modal Logic
+      const lettersContent = {
+        kangen: {
+          title: 'Buka Saat Kamu Lagi Kangen',
+          text: 'Hallo Bii! Kalau kamu lagi buka ini pas kangen, inget ya kalau aku juga pasti lagi kangen banget sama kamu. Langsung kabarin atau telfon aku aja ya. Aku selalu ada buat kamu!',
+        },
+        capek: {
+          title: 'Buka Saat Kamu Merasa Capek',
+          text: 'Capek ya harinya? Istirahat sebentar ya. Kamu udah berusaha ngelakuin yang terbaik hari ini. Inget kalau di sini ada aku yang selalu bangga dan siap dengerin semua keluh kesah kamu.',
+        },
+        sedih: {
+          title: 'Buka Saat Kamu Butuh Semangat',
+          text: 'Jangan patah semangat ya! Ceritain aja kalau ada hal yang bikin ganjel. Inget, kamu udah berjuang sejauh ini dan itu keren banget. Aku bakal selalu ada di samping kamu buat dukung apapun itu!',
+        },
+        tidur: {
+          title: 'Buka Saat Kamu Mau Tidur',
+          text: 'Istirahatin pikiran dan badan kamu dulu ya. Kamu udah berusaha yang terbaik hari ini, jangan lupa makasih sama diri sendiri. Good night sayang, sleep tight & sweet dreams! 🌻✨',
+        },
+      };
+
+      function openLetter(type) {
+        const letter = lettersContent[type];
+        if (letter) {
+          document.getElementById('modalTitle').innerText = letter.title;
+          document.getElementById('modalText').innerText = letter.text;
+          document.getElementById('letterModal').classList.add('active');
+        }
+      }
+
+      function closeLetter() {
+        document.getElementById('letterModal').classList.remove('active');
+      }
+
+      // 4. Floating Sunflower Canvas Animation
+      const canvas = document.getElementById('petalCanvas');
+      const ctx = canvas.getContext('2d');
+      let width = (canvas.width = window.innerWidth);
+      let height = (canvas.height = window.innerHeight);
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      class Petal {
+        constructor() {
+          this.x = Math.random() * width;
+          this.y = Math.random() * height - height;
+          this.size = Math.random() * 8 + 6;
+          this.speedY = Math.random() * 1.5 + 0.8;
+          this.speedX = Math.random() * 1 - 0.5;
+          this.angle = Math.random() * 360;
+          this.spin = Math.random() * 2 - 1;
+        }
+
+        update() {
+          this.y += this.speedY;
+          this.x += this.speedX;
+          this.angle += this.spin;
+
+          if (this.y > height) {
+            this.y = -20;
+            this.x = Math.random() * width;
+          }
+        }
+
+        draw() {
+          ctx.save();
+          ctx.translate(this.x, this.y);
+          ctx.rotate((this.angle * Math.PI) / 180);
+          ctx.fillStyle = '#f59e0b'; // Sunflower yellow color
+          ctx.beginPath();
+          ctx.ellipse(0, 0, this.size, this.size / 2, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+      }
+
+      const petals = [];
+      for (let i = 0; i < 20; i++) {
+        petals.push(new Petal());
+      }
+
+      function animateCanvas() {
+        ctx.clearRect(0, 0, width, height);
+        petals.forEach((p) => {
+          p.update();
+          p.draw();
+        });
+        requestAnimationFrame(animateCanvas);
+      }
+      animateCanvas();
+
+      // 5. Surprise Sunflower Explosion Button
+      function spawnSunflowers() {
+        for (let i = 0; i < 25; i++) {
+          const petal = new Petal();
+          petal.y = height / 2 + (Math.random() * 100 - 50);
+          petal.x = width / 2 + (Math.random() * 100 - 50);
+          petal.speedY = Math.random() * -4 - 2;
+          petal.speedX = Math.random() * 6 - 3;
+          petals.push(petal);
+        }
+        // alert('🌻 Bunga matahari khusus terkirim buat Fharda Achmad! Makasih ya udah nemenin sebulan ini!');
+      }
+    </script>
+  </body>
+</html>
